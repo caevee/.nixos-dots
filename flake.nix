@@ -28,7 +28,7 @@
         username = "caevee";
         homeDirectory = "/home/caevee";
         configuration = {
-          imports = [ ./home.nix ];
+          imports = [ ./home/home.nix ];
         };
       };
     };
@@ -38,7 +38,7 @@
         inherit system;
 
         modules = [
-          ./system/configuration.nix
+          ./hosts/configuration.nix
         ];
 
       };
