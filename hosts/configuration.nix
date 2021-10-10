@@ -178,6 +178,7 @@ systemd.tmpfiles.rules = [
     barrier
     nextcloud-client
     virt-manager
+    git
   ];
 
   services.gnome.core-utilities.enable = false;
