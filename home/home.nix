@@ -14,6 +14,14 @@
     };
   };
 
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscodium;
+    extensions = with pkgs.vscode-extensions; [
+      vscodevim.vim
+    ];
+  };
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "caevee";
@@ -50,8 +58,6 @@
     tdesktop
     mgba
     neofetch
-    terminal-typeracer
-    terminal-parrot
     htop
     gnome.gedit
     evince
@@ -67,8 +73,6 @@
         libretro.mgba
       ];
     })
-    qutebrowser
-    dmenu
     unzip
     tela-icon-theme
     ungoogled-chromium
@@ -76,5 +80,6 @@
     qbittorrent
     gnome.gnome-disk-utility
     gnome.gnome-calculator
+    lshw
   ];
 }

@@ -91,52 +91,52 @@
 #  	  </configuration>
 #  	</monitors>
 #    '';
-systemd.tmpfiles.rules = [
-    "L+ /run/gdm/.config/monitors.xml - - - - ${pkgs.writeText "gdm-monitors.xml" ''
-  	<monitors version="2">
-  	  <configuration>
-  	    <logicalmonitor>
-  	      <x>1920</x>
-  	      <y>0</y>
-  	      <scale>1</scale>
-  	      <primary>yes</primary>
-  	      <monitor>
-  		<monitorspec>
-  		  <connector>HDMI-0</connector>
-  		  <vendor>HAR</vendor>
-  		  <product>LTF22Z6</product>
-  		  <serial>0x01010101</serial>
-  		</monitorspec>
-  		<mode>
-  		  <width>1680</width>
-  		  <height>1050</height>
-  		  <rate>59.954250335693359</rate>
-  		</mode>
- 	      </monitor>
-  	    </logicalmonitor>
-  	    <logicalmonitor>
-  	      <x>0</x>
-  	      <y>0</y>
-  	      <scale>1</scale>
-  	      <monitor>
-  		<monitorspec>
-  		  <connector>DP-3</connector>
-  		  <vendor>SNY</vendor>
-  		  <product>SONY TV</product>
-  		  <serial>0x01010101</serial>
-  		</monitorspec>
-  		<mode>
-  		  <width>1920</width>
-  		  <height>1080</height>
-  		  <rate>60</rate>
-  		</mode>
+ systemd.tmpfiles.rules = [
+     "L+ /run/gdm/.config/monitors.xml - - - - ${pkgs.writeText "gdm-monitors.xml" ''
+   	<monitors version="2">
+   	  <configuration>
+   	    <logicalmonitor>
+   	      <x>1920</x>
+   	      <y>0</y>
+   	      <scale>1</scale>
+   	      <primary>yes</primary>
+   	      <monitor>
+   		<monitorspec>
+   		  <connector>HDMI-0</connector>
+   		  <vendor>HAR</vendor>
+   		  <product>LTF22Z6</product>
+   		  <serial>0x01010101</serial>
+   		</monitorspec>
+   		<mode>
+   		  <width>1680</width>
+   		  <height>1050</height>
+   		  <rate>59.954250335693359</rate>
+   		</mode>
   	      </monitor>
- 	    </logicalmonitor>
-  	  </configuration>
-  	</monitors>
-    ''}"
-  ];
-  
+   	    </logicalmonitor>
+   	    <logicalmonitor>
+   	      <x>0</x>
+   	      <y>0</y>
+   	      <scale>1</scale>
+   	      <monitor>
+   		<monitorspec>
+   		  <connector>DP-3</connector>
+   		  <vendor>SNY</vendor>
+   		  <product>SONY TV</product>
+   		  <serial>0x01010101</serial>
+   		</monitorspec>
+   		<mode>
+   		  <width>1920</width>
+   		  <height>1080</height>
+   		  <rate>60</rate>
+   		</mode>
+   	      </monitor>
+  	    </logicalmonitor>
+   	  </configuration>
+   	</monitors>
+     ''}"
+   ];
+   
 
   # Configure keymap in X11
   services.xserver.layout = "de";
@@ -159,14 +159,12 @@ systemd.tmpfiles.rules = [
     firefox
     pciutils
     wine
-    (winetricks.override { wine = wine; })
     gnomeExtensions.appindicator
     gnomeExtensions.gamemode
     gnome.gnome-terminal
     alacritty
     gnome.nautilus
     file
-    appimage-run
     fzf
     bspwm
     sxhkd
@@ -175,8 +173,6 @@ systemd.tmpfiles.rules = [
     openssl
     gnome.zenity
     vulkan-tools
-    barrier
-    nextcloud-client
     virt-manager
     git
   ];
@@ -212,6 +208,15 @@ systemd.tmpfiles.rules = [
   };
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
+
+  environment.shellAliases = {
+    "homeupdate"="cd ~ && nix build ~/flake#homeManagerConfigurations.caevee.activationPackage";
+    "homeapply"="./result/activate";
+    "nixswitch"="sudo nixos-rebuild switch --flake ~/flake#nixos";
+    "nixconf"="vim ~/flake/hosts/configuration.nix";
+    "homeconf"="vim ~/flake/home/home.nix";
+    "workrust"="cd ~/Workspace/Rust && nix develop";
+  };
 
 
   # Open ports in the firewall.
